@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 $text=$_GET['user'];$pass=$_GET['pass'];
 $flag_text=0;$flag_pass=0;$cap=0;$small=0;$digit=0;$special=0;
 $pat1="/106120\d\d\d/";
@@ -10,13 +10,19 @@ $flag_text=1;
 for($i=0;$i<strlen($pass);$i++)
 {if(preg_match("/[A-Z]/",$pass[$i]))
  $cap=1;
-else if(preg_match("/[a-z]/",$pass[$i]))
+if(preg_match("/[a-z]/",$pass[$i]))
  $small=1;
-else if(preg_match("/[0-9]/",$pass[$i]))
+if(preg_match("/[0-9]/",$pass[$i]))
  $digit=1;
-else
+if(preg_match("/[\'^£$%&*()}{@#~?><>,|=_+¬-]/",$pass[$i]))
  $special=1;}
-if($digit==1 && $small==1 && $cap==1 && $special=1)
+if($digit==1 && $small==1 && $cap==1 && $special==1)
 $flag_pass=1;
 if( $flag_text==1 && $flag_pass ==1)
 header("Location: hello.html");
+if($flag_text==0)
+$_SESSION['flash'].="Invalid username<br>";
+if($flag_pass==0)
+$_SESSION['flash'].="Invalid password";
+header("Location: index.php");
+
