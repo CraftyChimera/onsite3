@@ -1,9 +1,5 @@
 <?php 
-session_start();
-ob_start();
-$a="hi";
-
-ob_end_flush();?>
+session_start();?>
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="content-type" content="text/html;">
@@ -16,11 +12,14 @@ ob_end_flush();?>
 <input type="text" name="user"><br><br>
 <label for="pass">Password</label>
 <input type="password" name="pass"><br>
+<img src="captcha.php">
+<input type="text" name="cap"><br>
 <button>submit</button>
 </form>
 <?php
 if(isset($_SESSION['flash']))
-{echo "<p>".$_SESSION['flash']."</p>";unset($_SESSION['flash']);
+{echo "<p>".$_SESSION['flash']."</p>";
+unset($_SESSION['flash']);
 }?>
 </body>
 </html>
